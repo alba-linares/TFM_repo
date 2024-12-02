@@ -1,0 +1,49 @@
+Tutoría 13-09-2024
+¿Qué he hecho?
+He reclasificado todos los usos de Cultivos herbáceos distinto de arroz según SIGPAC. Duda: lo dejo en cultivos herbáceos o lo distingo de secano-regadío, porque en el MUCVA no se puede diferenciar.
+
+He recalculado los puntos y les he dado valores. Para los que estaban en el mar, los he seleccionado y asignado manualmente la categoría Mares y océanos.
+
+Mann-Kendall -> Excel
+
+He sacado todas las capas de GEE de LSWI, tanto de humedal como de buffer
+
+Script R:
+- Evaluación de los cambios de uso del suelo y los he contado, 	                                    pero salen muchas categorías :(
+- He intentado analizar los cambios de uso del suelo costerro vs interior
+- He empezado a analizar lswi (GRÁFICO)
+
+
+NOTAS DE LA PROPIA TUTORÍA
+----------------------------------------------------------
+
+Revisar nombres [Revisados, el problema era del Excel, no de los nombres en R]
+Pendiente Mann-Kendall [No encuentro cuál es la pendiente; tau es la correlación (positiva o negativa) (hay que tener en cuenta si la diferencia es significativa)]
+Matriz de cambios de usos del suelo [Creadas]
+Índices de cambios positivo/negativo
+
+Abreviar o códigos
+
+Separar buffer vs humedal
+Importante hacer por humedal
+Análisis 
+Cambios revertibles o no, positivos o negativos
+
+Hábitat: pedir tutoría a Eva
+
+Impacto 99-2021
+
+Quitar modelo lineal
+
+Añadir a Word los usos generales
+Hacerlo para usos generales y específicos
+Análisis
+
+SSEE opcional, mejor ir terminando cosas
+
+Concertar horas 
+(8-10 M J clases)
+X 9:30 Eva
+V 9:30-11:00 con Javi (llevar NDWI, incluir pendiente Mann-Kendall, ETC)
+
+MIRAR WORD TESIS QUE ME MANDA JAVI

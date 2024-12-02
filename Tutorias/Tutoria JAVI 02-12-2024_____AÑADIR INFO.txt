@@ -1,0 +1,40 @@
+Consultar:
+Gráficas índices por humedal, ¿? = Gráficas NDVI, LSWI, NDWI lubridate por humedal hum/buffer
+Gráficos ProfileTool QGIS: revisar las que hay hechas; ¿de todos los humedales o solo de los significativos? Cómo se incluyen en la memoria. ¿Hacer también de NDVI?
+
+Análisis de datos (Estadística)
+Gráfico regadío/humedad
+¿Habría que analizar la estadística de regadío/LSWI? ¿Cómo?
+¿SE TIENE QUE TENER EN CUENTA LA DIFERENCIA DE PERIODOS? LSWI=1999-2010/2011-2021, regadío=1984/2020
+
+__________________________________________________________________________________________________
+
+Cambiar ejes x-y en %regadio/LSWI
+Clonar repositorio
+
+HIC por humedales y cuáles son prioritarios. Riqueza
+Tener en cuenta la extensión del humedal
+Citar WARP 2014_Wetland and landscape indices for assessing the condition of semiarid Mediterranean saline wetlands under agricultural hydrological pressures
+
+Ver qué valores usar: porcentaje, ranking... para evaluar estado consev
+Tener en cuenta el estado de conservación 
+
+Coeficiente correlación de Spearman cor.test() en R. Debería ser shapiro, pero
+
+Quitar NDWI memoria
+Estadística zonal, rehacer cálculo. Calcular por area de polígono de Land Cover (%regadío, NO invernadero) y solo para buffer (Cortar por buffer por humedal)
+Add geometry atributtes con Disolve -> %
+
+ + (1 | year)
+
+library(permuco)
+aovperm()
+
+Hacer boxplot por humedales por wetland_buffer y periodos (columna: periodo 1, periodo 2), con facet_wrap de ggplot, variable periodo.
+
+Hacer gráfico LSWI periodos para costero/interior, como en objetivos, y lo mismo para protegido/no protegido.
+
+
+ANÁLISIS MULTICRITERIO: topsis mca para restauración prioridades
+
+Martes 10 3h-4h para la matriz

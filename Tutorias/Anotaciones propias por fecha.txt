@@ -1,0 +1,246 @@
+19/09/2024:__________________________________________________________________________________________________
+[Resuelto] Rehacer NDWI zone01h y zone02h por un error (Comprobado, estaba bien)
+
+Media y mediana de LSWI en humedal: 0.049186385 y 0.047407782
+Media y mediana de NDWI en humedal: -0.103248902 y -0.121976306
+¿Hay algo mal en la fórmula? ¿Por qué sale en negativo?
+
+20/09/2024:__________________________________________________________________________________________________
+[Done] Quiero hacer gitignore a .Rhistory
+
+
+
+Al correr este código me sale un error (In kendall(y) : The Kendall Tau should have at least 6 observations):
+for (i in 1:length(r_list)) {
+  # Obtener el raster de la zona actual
+  r <- r_list[[i]]
+  
+  # Agregar con un factor de 8 (mayor resolución aprox. 200m)
+  r8 <- aggregate(r, fact = 8)
+  
+  # Calcular las estadísticas de Mann-Kendall
+  mk <- raster.kendall(r8, method = "none")
+  
+  # Guardar el resultado en la lista con el nombre de la zona
+  mk_results[[zones[i]]] <- mk
+  
+  # Escribir el raster resultante en un archivo TIFF
+  output_filename <- paste0("input_", zones[i], "_lswi_ts_scale8.tif")
+  writeRaster(r8, output_filename, overwrite = TRUE)
+  
+  # Imprimir mensaje de progreso
+  print(paste("Archivo guardado:", output_filename))
+}
+
+
+24/09/2024:__________________________________________________________________________________________________
+PUNTOS HIC: Quizás haya que tener en cuenta si están en zona marina o no
+
+[Resuelto] Me he quedado a medias poniendo el nombre del humedal que coincide con MUCVA_zonas naturales, porque hay poligonos compartidos entre varios humedales y no sé cortarlos
+
+27/09/2024:__________________________________________________________________________________________________
+[Done] Sigo con el calculo del area de los usos del suelo, ahora tengo que analizarlo en R, ¿cómo lo hago?
+[Done] También tengo que comparar los cambios de usos del suelo por buffer/humedal
+
+01/10/2024:__________________________________________________________________________________________________
+
+
+Tengo que enseñarle a Javi la grafica de LSWI vs NDWI, que ya está terminada************************************************************************
+
+
+Tengo que avanzar en la memoria (metodología y resultados)
+[Done] Tengo que analizar los datos de áreas ¿Cómo?
+[Falta comentarlo en la memoria, incluyendo costeros/de interior con el cluster:] Puede ser interesante estudiar la diferencia de áreas de usos del suelo por costero/interior y humedal/buffer entre 1984 y 2020.
+
+02/10/2024:__________________________________________________________________________________________________
+[Done] Quiero saber las áreas de usos del suelo por USOS_DEFINITIVOS para 1984 y para 2020
+Libro: Análisis de datos ecológicos en R Luis Cayuela y Marcelino de la Cruz
+
+[Resuelto] Debería equilibrarse las áreas ganadas y perdidas por humedal (pero no me sale así) [resuelto: orden de columnas al restar en Excel]
+[Done] Estaría bien hacer el análisis de las áreas de los usos POR HUMEDAL/BUFFER por separado
+
+03/10/2024:__________________________________________________________________________________________________
+[Resuelto: mismo orden] ¿Me quedo con el análisis cluster de los gráficos de áreas o es mejor conservar el mismo orden para comparar mejor?
+Comentarios de Eva: 
+	- [Done] hacer los gráficos según % de cambio, porque hay que estandarizar. Hay humedales MUY grandes y MUY pequeños y no se pueden comparar por unidades de área, sino %.
+	- [Done] quitar cluster_cols para que sea más fácilmente comparable. Los cluster que más interesan son los que hay entre humedales (cluster_rows)
+	- poner los cambios del área en la memoria y las áreas de 1984 y 2020 por separado dejarlo en ANEXOS
+
+Para mañana:
+	- [Done] continuar con "# PRUEBA: PORCENTAJE PARA EL GRÁFICO" e incluir los humedales en ese análisis. Esto es para los gráficos estandarizados.
+	- [Done] se ha quedado a medias la composición en QGIS del tau.
+	- [Done] incluir la composición del tau en QGIS en la memoria del TFM
+
+12/10/2024:__________________________________________________________________________________________________
+[Resuelto] El porcentaje lo he calculado en función del área total entre todos los humedales; creo que debería hacerlo por humedal para estandarizar. ¿Cómo lo hago? 
+Habría que analizar si estos cambios son significativos y ponerlos en los gráficos
+
+15/10/2024:__________________________________________________________________________________________________
+- Estaría bien mirar la relación entre LSWI y costero/interior y protección.
+- En LSWI_trend_mann_kendall.R estoy intentando hacer un ANOVA de medidas repetidas para analizar lo anterior, pero me da error, ¿cómo lo hago?
+- He empezado a hacer los mapas de NDVI -> eutrofización¿? en GEE y Colab
+
+17/10/2024:__________________________________________________________________________________________________
+MODELOS Y GRÁFICO DE LÍNEAS PARA: Protegido o no, tendencia LSWI, estabilidad=bien, cambios lswi=mal, MIRAR SIGNIFICANCIA
+	Mirar también por buffer/humedal,
+Importante mirar responder preguntas importantes para la gestión antes de hacer cualquier análisis
+
+21/10/2024:__________________________________________________________________________________________________
+- Continuar comentando la tabla de HICxUSOS SIOSE en la memoria
+
+
+Comparaciones:
+USOS + costero/interior
+Presión + costero/interior
+USOS + protección
+LSWI +
+NDVI +
+
+¿Qué hago con Presión?
+
+ANOVA de medidas repetidas para LSWI/NDVI ¿?
+MODELOS Y GRÁFICO DE LÍNEAS PARA: Protegido o no, tendencia LSWI, estabilidad=bien, cambios lswi=mal, MIRAR SIGNIFICANCIA
+	Mirar también por buffer/humedal,
+
+DATASETS Y CATEGORÍAS
+Resultados_puntos_analisis.xlsx (analisis_cambios_usos)
+ [1] "wkt_geom"              "id"                    "NOMBRE_HUM"            "FIGURA"               
+ [5] "GRUPO_TIPO"            "COD_IHA"               "PROPIEDAD"             "ZONA"                 
+ [9] "MUCVA_COD"             "MUCVA1984"             "MUCVA1984_COD_GENERAL" "MUCVA1984_GENERAL"    
+[13] "MUCVA_PRES"            "SIOSE_COD"             "SIOSE2020"             "SIOSE2020_COD_GENERAL"
+[17] "SIOSE2020_GENERAL"     "SIOSE_PRES"            "COMPARACION"  
+
+
+LSWI_zones_hum_buf (LSWI_trend)
+> colnames(datos)
+ [1] "wetland_name"             "zone"                     "wetland_or_buffer"        "year"            
+ [5] "lswi"                     "ndvi"                     "environmental_protection" "protection_yes_no"       
+ [9] "conservation"             "location"                 "sup_ha"                   "perim_m"          
+[13] "hydro_periods"            "COD_IHA"     
+
+
+puntos_hic_zonas_naturales (analisis_hic_usos)
+> colnames(datos)
+ [1] "id"                            "NOMBRE_HUM"                    "FIGURA"                       
+ [4] "GRUPO_TIPO"                    "COD_IHA"                       "PROPIEDAD"                    
+ [7] "ZONA"                          "ENP"                           "CODIGO_UE1"                   
+[10] "NOM_ANEXO1"                    "LEYENDA_1"                     "CODIGO_UE2"                   
+[13] "LEYENDA_2"                     "CODIGO_UE3"                    "LEYENDA_3"                    
+[16] "CODIGO_UE4"                    "LEYENDA_4"                     "MUCVA_ZONAS_NAT_C_ESPECIFICAS"
+[19] "MUCVA_ZONAS_NAT_T_ESPECIFICAS" "MUCVA_ZONAS_NAT_T_GENERAL"     "MUCVA_ZONAS_NAT_C_GENERAL"    
+[22] "MUCVA_C_ES"                    "MUCVA_T_ES"                    "MUCVA_C_GE"                   
+[25] "MUCVA_T_GE"                    "MUCVA_PRES"                    "SIOSE_C_ES"                   
+[28] "SIOSE_T_ES"                    "SIOSE_C_GE"                    "SIOSE_T_GE"                   
+[31] "SIOSE_PRES"                    "SIOSE_C_RI"                    "SIOSE_T_RI"                   
+[34] "PRESENCIA_HIC"                 "PRESENCIA_ZONA_NAT"            "TIPO DE CAMBIO"               
+[37] "VARIEDAD_HIC"                  "COMPARACION" 
+
+
+MUCVA+SIOSE_areas_usos (analisis_areas_usos)
+ [1] "COD_NUEVO"         "USOS_DEFINITIVOS"  "USOS_GENERAL"      "COD_GENERAL"       "COD_PRESION"     
+ [6] "ORIGEN"            "HUMEDAL"           "AREA_USOS"         "AREA_USOS_HUMEDAL" "AREA_USOS_BUFFER" 
+
+__________________________________________________________________________________________________
+__________________________________________________________________________________________________
+Tutoría:
+
+COMPARACIÓN: (IGUAL O DISTINTO) BINOMIAL. Análisis significancia
+Redactar
+% puntos que han cambiado
+Resta presión. Primero restar por puntos. Compararlo con buffer, protección...
+nº cambios y % de puntos que han ido a más intensivo
+
+Hilar el discurso de la memoria
+Citar valores extremos en el discurso
+Tablas en ANEXOS (seleccionar)
+
+Cantidad zonas húmedas antes y después y lo mismo con Cobertura vegetal y suelos: análisis análogo al LSWI y NDVI para ver cambios en la humedad y en la vegetación
+
+Zonas naturales -> HIC y Zonas naturales -> noHIC + binomial
+Figura de protección ¿protege? Partir de las que son zonas naturales 
+
+
+
+23/10/2024:__________________________________________________________________________________________________
+Preg 1: cambios son similares/diferentes interior-costa y protegido-no protegido: graf barras <- % cambio y buffer-humedal + modelo mixto
+
+Preg 2: en humedales donde haya un incremento del regadío en el buffer, habrá más comunidades de saladar/carrizal y un incremento en el índice de humedad
+
+Resultados puntos analisis: 0=IGUAL 1=DISTINTO cambio
+Tipo de cambio = resta de presiones. + y - MUCVA-SIOSE= - ES MÁS PRESIÓN
+Puntos por buffer son más que en humedal¿?  Buffer (1509) Humedal (571) 
+Separar los análisis por buffer y por humedal y que el % sea sobre el total en cada grupo y no sobre el total de puntos
+
+Estaría bien definir una paleta de colores para las gráficas porque están saliendo muy diferentes entre sí
+#fc746c rojo rosado y #04bcc4 azul
+
+Incluir pie de tabla y pie de figura para que se entienda mejor todo por sí mismo (como la gráfica: Cambios en el área de usos del suelo en porcentaje fuera del humedal (buffer) entre los años 1984-2020)
+
+
+- [Done] Tengo que hacer el gráfico de proporción (sin cambios, cambios positivos, cambios negativos) para costeros/de interior
+- Continuar modelos y gráficos para responder la pregunta 1 a partir del código de analisis_cambios_usos
+
+
+25/10/2024__________________________________________________________________________________________________
+MODELOS:
+	Qué factores hacen que aumente la presión: + y 0 es 0 y 1 en -
+	Multivariante con tres variables respuesta 0 - y + en % (estandarizar)
+
+PROPIEDAD POR ANÁLISIS MULTIVARIANTE, QUE DEPENDE DEL HUMEDAL
+
+
+28/10/2024:
+Continuar con "Zonas naturales -> HIC y Zonas naturales -> noHIC + binomial; Figura de protección ¿protege? Partir de las que son zonas naturales" en analisis_hic_usos en
+################################################################################
+                          # MODELO GENERALIZADO MIXTO
+################################################################################
+
+30/10/2024:__________________________________________________________________________________________________
+Lo que queremos hacer es comparar lo que se ha perdido de hábitat. Los que han cambiado (1_0) ¿qué usos son ahora?
+
+04/11/2024:__________________________________________________________________________________________________
+La capa de hábitats es de Vege10, ergo, del 2010, que lo he estado buscando varios días para incluirlo en la memoria. Lo he comparado con los hábitats de HIC_publicacion_2023_12 y puede dar resultados muy distintos, así que tengo que rehacer los análisis de HIC
+
+Mencionar que no se tienen en cuenta los HIC marinos
+
+Añadir detalles de los humedales en la memoria (hidroperiodo, por ejemplo, puede ser útil para la discusión)
+Sería interesante hacer el gráfico de protegido/no protegido f(PRESENCIA_HIC) solo con zona humedal y no buffer
+
+Los graficos de presencia de HIC quizás debería ser sobre tipo de cambio 1_0 o ese debería ser el centro del análisis
+
+12/11/2024:__________________________________________________________________________________________________
+Incluir presión como subapartado de los cambios de usos del suelo, ¿no? Consultar
+Hay que consultar la bibliografia descargada para hacer la introducción y discusión
+
+
+19/11/2024:__________________________________________________________________________________________________
+Continuar la discusión.
+Buscar más papers de los humedales de Granada y Vera.
+Exportar y añadir los gráficos de área suelos buffer 2020 en ANEXOS.
+Arreglar problema de Git.
+Calcular el % de los hábitats por humedal en el Excel.
+Seguir leyendo los artículos de JML para la discusión. Mirar también los de Juan Gisbert, Esteve y otros autores relacionados. Comparar con los datos de los humedales ligados al Mar Menor.
+
+20/11/2024:__________________________________________________________________________________________________
+Seguir eliminando todos los puntos que tienen Mares y océanos. Revisar el nº de puntos en Resultados_puntos_analisis.xlsx
+
+21/11/2024:__________________________________________________________________________________________________
+Continuar escribiendo tabla de resultados estadísticos
+
+
+
+
+MODELOS Y GRÁFICO DE LÍNEAS PARA: Protegido o no, tendencia LSWI, estabilidad=bien, cambios lswi=mal, MIRAR SIGNIFICANCIA
+	Mirar también por buffer/humedal,
+
+26/11/2024:__________________________________________________________________________________________________
+Preguntar a Mariano sobre:
+	This trend has levelled off in recent years due to the Andalusian government’s prohibition of new greenhouses en https://marianoparacuellos.wordpress.com/wp-content/uploads/2012/05/2011-long-term-water-monitoring-in-two-mediterranean-lagoons.pdf
+
+Revisar https://github.com/Paquicf/LULCMAP-MarMenor_Watershed/tree/master
+
+27/11/2024:__________________________________________________________________________________________________
+Añadir gráficas Spectral Profile LSWI y hacer las de NDVI. ¿Está bien si no tienen exactamente la misma escala?
+
+29/11/2024:__________________________________________________________________________________________________
+Hoy: tabla de ANOVA pero bien hechas

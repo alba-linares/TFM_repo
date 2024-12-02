@@ -1,0 +1,25 @@
+INDICES
+Gráficas NDVI, LSWI, NDWI lubridate por humedal hum/buffer
+Subset indices cajas y bigotes humedal/buffer
+mann kendal lswi y otros indices
+[Done] lswi qué ha pasado por humedal
+[Done] NDVI qué ha pasado por humedal
+https://rawcdn.githack.com/javimarlop/ecoinformatica_ugr/fd77ba460e214366a7a922595040f4ce1bad711f/guidelines_workflow_GEE_R.html grafica QGIS pixeles
+Tendencia = tau ¿?
+[Revisar] gráf dispersión x cambio en agrario y/o invernadero, y= cambios período humedad pendiente/tau por humedal MK - relación regadio-humedad
+[¿Barras apiladas? LSWI_periods y % regadío¿?]
+
+
+HIC
+[Done] Magnitud de la presión de los cambios de usos del suelo actuales de las zonas categorizadas como naturales en 1984 y en las que no hay presencia de Hábitats de Interés Comunitario en los puntos de análisis EXPLICAR CÓMO SE CONSIGUEN
+[Done, coincide parcialmente. NO hay HICs en zonas no naturales actuales(Codes 3,5)-menos 1 observación-, pero sí hay zonas naturales actuales sin HIC] zona natural actual <~> HIC actual ¿? Puede que no
+[Done] Matriz pequeña: indicar cambio, quizás la resta de los totales marginales por celda
+
+
+MEMORIA
+[Done] Nomenclatura: Figura 4.2.a, 4.2.b
+[Done] Simplificar frases al referenciar figuras y tablas. "Como se puede observar en la tabla..." está mal, mejor decirlo directamente y luego (tabla ???).
+De lo general a lo específico
+[Done] índices, abajo de cambios usos suelo
+Tabla con 
+[Done; No ha sido muy útil, hay que ver lo que se hace] Comparar áreas entre HIC_98 y HIC23
