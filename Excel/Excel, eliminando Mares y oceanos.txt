@@ -1,0 +1,4 @@
+MUCVA+SIOSE_areas_usos_sin_mar
+Resultados_puntos_analisis_sin_mar
+puntos_hic_zonas_naturales_sin_mar
+matriz_tabla_contingencia_sin mar
